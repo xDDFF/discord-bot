@@ -1,7 +1,8 @@
 import discord
+import time
 from discord.ext import commands
 
-TOKEN = 'NDYzMTI2OTA2MTMzNDEzOTAw.DhxRlw.OaPh-D_Xj0p8PT8fpk1SN131M0Q'
+TOKEN = 'BOT_TOKEN'
 BOT_PREFIX = ('!', '.')
 
 bot = commands.Bot(command_prefix=BOT_PREFIX)
@@ -20,5 +21,12 @@ async def on_ready():
 @bot.command()
 async def greet(ctx):
 	await ctx.send('hello')
-	
+
+@bot.command()
+async def pack(ctx):
+	await ctx.send('Grab your weed! Grind your weed! get ready! this is going to be a channel wide tokeout in 1 minute!')
+	for x in reversed(range(5)):
+		await ctx.send('0x000%d' % (x))
+	await ctx.send('READY! FIRE UP YOUR BOWLS!!')
+
 bot.run(TOKEN) 
