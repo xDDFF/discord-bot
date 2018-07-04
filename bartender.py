@@ -9,18 +9,13 @@ except ImportError:
 	print('Discord.py is not installed!')
 	sys.exit(0)
 
-
 TOKEN = 'BOT_TOKEN'
 BOT_PREFIX = ('!', '.')
 
 bot = commands.Bot(command_prefix=BOT_PREFIX)
 
-def check_bot_dirs():
-	dirs = ("cogs", "data", "log")
-	for dir in dirs:
-		if not os.path.exists(dir):
-			print('[%s] directory not FOUND! creating...' % (dir))
-			os.makedirs(dir)
+extensions = ["news",
+		"pack"]
 
 @bot.event
 async def on_ready():
@@ -31,20 +26,13 @@ async def on_ready():
 	print('LOGGIN ENABLED...')
 	print('=-=-=-=-=-=-=-=-=-=-=-')
 
-#@bot.event
-#async def on_command_error(ctx, error):
 
-@bot.command()
-async def beer(ctx):
-	nick = ctx.author.display_name
-	await ctx.send('_gives ' + nick + ' a cold beer!_')
-	await ctx.send('is a Warsteiner! ' + nick + ' enjoy!!')
-
-@bot.command()
-async def joint(ctx):
-	nick = ctx.author.display_name
-	await ctx.send('_lights ' + nick + ' joint!!_')
-	await ctx.send('blaze brah!!!')
-
-check_bot_dirs()
+## Load extensions
+if __name__ == "__main__":
+    for ext in extensions:
+        try:
+            bot.load_extension(ext)
+        except Exception as e:
+            exc = '{}: {}'.format(type(e).__name__, e)
+            print('Failed to load extension {}\n{}'.format(ext, exc))
 bot.run(TOKEN) 
