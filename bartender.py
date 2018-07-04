@@ -1,4 +1,7 @@
 import os
+from os import listdir
+from os.path import isfile, join
+
 import datetime
 import sys
 from subprocess import *
@@ -14,8 +17,8 @@ BOT_PREFIX = ('!', '.')
 
 bot = commands.Bot(command_prefix=BOT_PREFIX)
 
-extensions = ["news",
-		"pack"]
+#TODO: move all cogs and loader to their own directory
+extensions = ["news", "common", "manage_chan"]
 
 @bot.event
 async def on_ready():
@@ -25,14 +28,16 @@ async def on_ready():
 	print('BOT_USER_ID : ' + str(bot.user.id))
 	print('LOGGIN ENABLED...')
 	print('=-=-=-=-=-=-=-=-=-=-=-')
+	await load_cog()
 
+async def load_cog():
+	for ext in [f.replace('.py', '') for f in listdir('cogs') if isfile(join('cogs', f))]:
+		try:
+			if not '__init__' in ext:
+				print("Loading {}...".format(ext))
+				bot.load_extension('cogs.' + ext)	
+		except Exception as e:
+            		exc = '{}: {}'.format(type(e).__name__, e)
+            		print('Failed to load extension {}\n{}'.format(ext, exc))
 
-## Load extensions
-if __name__ == "__main__":
-    for ext in extensions:
-        try:
-            bot.load_extension(ext)
-        except Exception as e:
-            exc = '{}: {}'.format(type(e).__name__, e)
-            print('Failed to load extension {}\n{}'.format(ext, exc))
 bot.run(TOKEN) 
