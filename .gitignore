@@ -5,7 +5,7 @@ __pycache__/
 
 # Cleanup
 git.py
-
+requirements.txt
 # C extensions
 *.so
 

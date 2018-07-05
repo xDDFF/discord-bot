@@ -1,3 +1,4 @@
+import asyncio
 import os
 from os import listdir
 from os.path import isfile, join
@@ -17,9 +18,6 @@ BOT_PREFIX = ('!', '.')
 
 bot = commands.Bot(command_prefix=BOT_PREFIX)
 
-#TODO: move all cogs and loader to their own directory
-extensions = ["news", "common", "manage_chan"]
-
 @bot.event
 async def on_ready():
 	print('\n=-=-=-=-=-=-=-=-=-=-=-')
@@ -30,6 +28,11 @@ async def on_ready():
 	print('=-=-=-=-=-=-=-=-=-=-=-')
 	await load_cog()
 
+@bot.command()
+async def clear(ctx, amount=100):
+	await ctx.channel.purge(limit=int(amount))
+
+#load cogs
 async def load_cog():
 	for ext in [f.replace('.py', '') for f in listdir('cogs') if isfile(join('cogs', f))]:
 		try:
@@ -39,5 +42,6 @@ async def load_cog():
 		except Exception as e:
             		exc = '{}: {}'.format(type(e).__name__, e)
             		print('Failed to load extension {}\n{}'.format(ext, exc))
+
 
 bot.run(TOKEN) 
