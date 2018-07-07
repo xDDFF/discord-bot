@@ -13,7 +13,7 @@ except ImportError:
 	print('Discord.py is not installed!')
 	sys.exit(0)
 
-TOKEN = 'BOT_TOKEN'
+TOKEN = 'NDYzMTI2OTA2MTMzNDEzOTAw.DiAwMw.Cj4FBYtAv8tyMRJM6yDuZepKPpc'
 BOT_PREFIX = ('!', '.')
 
 bot = commands.Bot(command_prefix=BOT_PREFIX)

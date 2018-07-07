@@ -11,7 +11,6 @@ class news:
 		"""Prints news articles !news <register/hackernews> """	
 		if(source == ''):
 			await ctx.send('Usage is !news <register/hackernews>')
-			exit(0)
 		
 		if(source == 'register'):
 			URL = 'https://www.theregister.co.uk/security'
@@ -28,13 +27,22 @@ class news:
 					time.sleep(2)					
 		if(source == 'hackernews'):
 			URL = 'https://thehackernews.com'
-		# Grab and parse the html page
+			# Grab and parse the html page
 			HTML_DOC = requests.get(URL)
 			s = BeautifulSoup(HTML_DOC.text, 'html.parser')
-		# story_link titles
+			# story_link titles
 			story_link = s.find_all("a", {"class": "story-link"})
 			for i in range(0, 4):
 				await ctx.send(story_link[i].get('href'))
+				time.sleep(2)
+
+		if(source == 'ars'):
+			URL = 'https://arstechnica.com'
+			HTML_DOC =requests.get(URL)
+			s = BeautifulSoup(HTML_DOC.text, 'html.parser')
+			overlay = s.find_all("a", {"class": "overlay"})
+			for i in [0, 2, 4, 6]:
+				await ctx.send(overlay[i].get('href'))
 				time.sleep(2)
 def setup(bot):
 	bot.add_cog(news())
