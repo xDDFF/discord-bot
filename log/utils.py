@@ -17,6 +17,6 @@ def check_log_file():
 	
 def write_log(arg):
 	f = open(PATH, 'a+')
-	f.write(DATE + ' ' + TIME + '-- commit submitted] ' + '[' + arg + ']\n')
+	f.write(DATE + ' ' + TIME + '-- [commit submitted] ' + '[' + arg + ']\n')
 	f.close()
 

@@ -14,6 +14,9 @@ except ImportError:
 	sys.exit(0)
 
 TOKEN = 'NDYzMTI2OTA2MTMzNDEzOTAw.DiAwMw.Cj4FBYtAv8tyMRJM6yDuZepKPpc'
+if TOKEN == '':
+	print('[AUTH ERROR] check bartender.py for BOT_TOKEN')
+	sys.exit(0)
 BOT_PREFIX = ('!', '.')
 
 bot = commands.Bot(command_prefix=BOT_PREFIX)
@@ -42,6 +45,5 @@ async def load_cog():
 		except Exception as e:
             		exc = '{}: {}'.format(type(e).__name__, e)
             		print('Failed to load extension {}\n{}'.format(ext, exc))
-
 
 bot.run(TOKEN) 

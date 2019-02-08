@@ -33,7 +33,6 @@ class common:
 			time.sleep(1)
 		await ctx.send('TIME IS UP! FIRE UP YOUR BOWLS!')
 	
-	#; commands that need to be ported
 	@commands.command()
 	async def ddos(self, ctx, target=''):
 		'''DDoS command, OMG DdAs cUm1n!!!'''

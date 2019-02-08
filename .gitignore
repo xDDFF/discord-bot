@@ -7,6 +7,8 @@ __pycache__/
 git.py
 requirements.txt
 .*.*.swp
+log
+
 # C extensions
 *.so
 

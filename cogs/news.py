@@ -4,6 +4,7 @@ import time
 from bs4 import BeautifulSoup
 from discord.ext import commands
 
+#TODO: Clean up and bundle command
 class news: 
 	
 	@commands.command()
@@ -25,6 +26,7 @@ class news:
 				for b in links:
 					await ctx.send('https://www.theregister.co.uk%s\n' % (b.get('href')))
 					time.sleep(2)					
+		
 		if(source == 'hackernews'):
 			URL = 'https://thehackernews.com'
 			# Grab and parse the html page
@@ -38,8 +40,10 @@ class news:
 
 		if(source == 'ars'):
 			URL = 'https://arstechnica.com'
+			# Grab and parse the html page
 			HTML_DOC =requests.get(URL)
 			s = BeautifulSoup(HTML_DOC.text, 'html.parser')
+			# overlay links and titles
 			overlay = s.find_all("a", {"class": "overlay"})
 			for i in [0, 2, 4, 6]:
 				await ctx.send(overlay[i].get('href'))
