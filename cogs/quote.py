@@ -7,7 +7,7 @@ import random
 import discord
 from discord.ext import commands
 
-FILE_PATH = '/home/user/discord-bot/quotes.db'
+FILE_PATH = '/home/discord/discord-bot/quotes.db'
 
 #TODO: findquote search term and print  3 results 
 #TODO: put last quote as a global variable to use accross the commands.
